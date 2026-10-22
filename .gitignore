@@ -5,3 +5,7 @@ dist
 assets/
 references/
 *.iml
+
+# keep the site images even though a global ignore rule excludes *.jpg
+!public/images/
+!public/images/*.jpg
