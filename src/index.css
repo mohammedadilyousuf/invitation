@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-[#050403] font-sans font-light text-cream antialiased; overflow-x: hidden; }
+  ::selection { background: #9a7632; color: #fff; }
+  select option { background: #120e09; color: #efe4c8; }
+}
+
+@layer components {
+  .btn-gold {
+    @apply inline-block cursor-pointer border border-gold bg-transparent px-8 py-3 font-sans text-[.7rem] uppercase tracking-[.3em] text-gold-soft transition-all duration-700 ease-out;
+  }
+  .btn-gold:hover { @apply -translate-y-0.5 bg-gold text-ink; box-shadow: 0 0 30px rgba(201, 162, 75, .45); }
+  .btn-solid { @apply bg-gold text-ink; }
+  .btn-solid:hover { @apply bg-gold-bright; }
+  .eyebrow { @apply font-sans text-[.7rem] uppercase tracking-[.4em] text-gold; }
+  .field {
+    @apply w-full border-0 border-b border-gold/50 bg-transparent px-1 py-3 font-display text-xl text-cream outline-none transition-colors duration-500 placeholder:text-cream/35 focus:border-gold-bright;
+  }
+}
+
+/* The invitation is a portrait "card": full width on phones, a centred glowing column on large screens. */
+.column { position: relative; margin: 0 auto; width: 100%; max-width: 560px; background: #0a0806; }
+@media (min-width: 700px) {
+  .column { box-shadow: 0 0 0 1px rgba(201, 162, 75, .25), 0 0 140px rgba(201, 162, 75, .14); }
+}
+
+.shimmer-gold {
+  background: linear-gradient(110deg, #c9a24b 18%, #fff0bd 38%, #e0bb62 50%, #c9a24b 70%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: sheen 6s linear infinite;
+}
+@keyframes sheen { to { background-position: -250% 0; } }
+
+.petal { position: fixed; top: -8%; z-index: 40; pointer-events: none; border-radius: 150% 0 150% 0; opacity: 0; animation: fall linear infinite; }
+@keyframes fall {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+  10%  { opacity: .8; }
+  50%  { transform: translate3d(var(--sway), 55vh, 0) rotate(200deg); }
+  100% { transform: translate3d(calc(var(--sway) * -1), 112vh, 0) rotate(420deg); opacity: 0; }
+}
+
+.eq span { display: inline-block; width: 3px; margin: 0 1px; background: currentColor; border-radius: 2px; animation: eq 1s ease-in-out infinite; }
+.eq span:nth-child(2) { animation-delay: .2s; }
+.eq span:nth-child(3) { animation-delay: .4s; }
+@keyframes eq { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+
+.spin-12 { animation: spin 16s linear infinite; }
+.spin-slow { animation: spin 140s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.float-y { animation: floaty 7s ease-in-out infinite; }
+@keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.glow-pulse { animation: glowp 3.5s ease-in-out infinite; }
+@keyframes glowp { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+.drift { animation: drift 22s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translateY(2%) scale(1.04); } to { transform: translateY(-3%) scale(1.1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .petal, .eq span, .shimmer-gold, .spin-12, .spin-slow, .float-y, .glow-pulse, .drift { animation: none; }
+}
