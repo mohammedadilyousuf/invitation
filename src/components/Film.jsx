@@ -4,7 +4,7 @@ import config from '../data/config';
 import Countdown from './Countdown';
 import ScratchReveal from './ScratchReveal';
 import RSVP from './RSVP';
-import { Divider, Medallion, Monogram, Overlay } from './Ornaments';
+import { Divider, Medallion, Overlay, Seal } from './Ornaments';
 import { asset, coupleImage, handsImage, fmtDate, fmtTime, mapsHref, saveTheDate } from '../utils';
 
 const ease = [0.22, 1, 0.36, 1];
@@ -29,10 +29,10 @@ function Names() {
     <Stage>
       <motion.p {...rise(0.3)} className="shimmer-ivory font-arabic text-3xl sm:text-4xl" dir="rtl">{hero.bismillah}</motion.p>
       <motion.p {...rise(1.2)} className="mx-auto mt-6 max-w-[17rem] font-display text-xl italic leading-relaxed text-cream sm:max-w-sm sm:text-2xl">{hero.welcome}</motion.p>
-      <motion.h1 {...rise(2.6)} className="mt-6 font-script leading-[1.05]">
-        <span className="shimmer-ivory block text-6xl sm:text-7xl">{couple.groom}</span>
+      <motion.h1 {...rise(2.6)} className="mt-6 font-display font-medium italic leading-[1.1] tracking-wide">
+        <span className="shimmer-ivory block text-5xl sm:text-6xl">{couple.groom}</span>
         <span className="my-1 block font-display text-3xl italic text-gold-soft">&amp;</span>
-        <span className="shimmer-ivory block text-6xl sm:text-7xl">{couple.bride}</span>
+        <span className="shimmer-ivory block text-5xl sm:text-6xl">{couple.bride}</span>
       </motion.h1>
       <motion.div {...rise(4)} className="mt-8"><Divider /></motion.div>
     </Stage>
@@ -112,7 +112,7 @@ function Closing({ onRsvp, onReplay }) {
   const { couple, closing } = config;
   return (
     <Stage>
-      <motion.div {...rise(0.2)}><Monogram initials={couple.initials} /></motion.div>
+      <motion.div {...rise(0.2)} className="w-36"><Seal initials={couple.initials} /></motion.div>
       <motion.p {...rise(1)} className="shimmer-ivory mt-8 font-display text-4xl font-medium italic leading-snug tracking-wide">{closing.line}</motion.p>
       <motion.p {...rise(1.8)} className="mt-6 font-display text-3xl text-cream">
         {couple.groom} <span className="font-script text-gold">&amp;</span> {couple.bride}

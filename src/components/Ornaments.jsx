@@ -126,3 +126,39 @@ export function SectionTitle({ eyebrow, title }) {
     </div>
   );
 }
+
+// Dark glass medallion with fine gold rings, two small star ornaments and the couple's initials in a clean serif.
+export function Seal({ initials }) {
+  // eight-pointed star (two squares, one turned 45 degrees)
+  const star = (y) => (
+    <g transform={`translate(120 ${y})`} fill="#c9a24b">
+      <rect x="-5" y="-5" width="10" height="10" />
+      <rect x="-5" y="-5" width="10" height="10" transform="rotate(45)" />
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 240 240" className="w-full overflow-visible">
+      <defs>
+        <radialGradient id="sealGlass" cx="50%" cy="38%" r="75%">
+          <stop offset="0" stopColor="#2b2012" stopOpacity=".92" />
+          <stop offset="1" stopColor="#0b0805" stopOpacity=".96" />
+        </radialGradient>
+        <linearGradient id="sealRing" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#f6e3a6" />
+          <stop offset=".5" stopColor="#c9a24b" />
+          <stop offset="1" stopColor="#8a6420" />
+        </linearGradient>
+      </defs>
+      <circle cx="120" cy="120" r="108" fill="url(#sealGlass)" stroke="url(#sealRing)" strokeWidth="2" />
+      <circle cx="120" cy="120" r="97" fill="none" stroke="#c9a24b" strokeWidth=".7" opacity=".7" />
+      {star(34)}
+      {star(206)}
+      <circle cx="120" cy="120" r="76" fill="none" stroke="#c9a24b" strokeWidth=".6" opacity=".45" />
+      <g textAnchor="middle" fontFamily="Cormorant Garamond, serif" fontStyle="italic">
+        <text x="78" y="143" fontSize="66" fontWeight="500" fill="#fff6dc">{initials[0]}</text>
+        <text x="162" y="143" fontSize="66" fontWeight="500" fill="#fff6dc">{initials[1]}</text>
+        <text x="120" y="132" fontSize="30" fill="#e6cf8e">&amp;</text>
+      </g>
+    </svg>
+  );
+}
