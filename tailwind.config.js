@@ -15,7 +15,7 @@ export default {
         display: ['"Cormorant Garamond"', 'serif'],
         serif: ['"Playfair Display"', 'serif'],
         sans: ['Lato', 'system-ui', 'sans-serif'],
-        arabic: ['Amiri', 'serif'],
+        arabic: ['"Aref Ruqaa"', '"Amiri Quran"', 'Amiri', 'serif'],
         script: ['"Pinyon Script"', 'cursive'],
       },
     },

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import config from '../data/config';
 import Reveal from './Reveal';
-import { Frame, Overlay, SectionTitle } from './Ornaments';
+import { Frame, SectionTitle } from './Ornaments';
 
 const pad = (n) => String(n).padStart(2, '0');
 
@@ -31,7 +31,6 @@ export default function Countdown() {
 
   return (
     <section id="countdown" className="relative overflow-hidden px-5 py-28 sm:py-36">
-      <Overlay src="curtains.jpg" className="absolute inset-0 h-full w-full object-cover opacity-60" />
       <div className="relative">
         <SectionTitle eyebrow="Counting the moments" title="Until We Say Qubool Hai" />
         <Reveal className="mx-auto max-w-md">

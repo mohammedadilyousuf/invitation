@@ -14,7 +14,7 @@ const config = {
   },
 
   hero: {
-    bismillah: 'بسم الله الرحمن الرحيم',
+    bismillah: 'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',
     welcome: 'We are honoured to welcome you to the wedding ceremony of',
   },
 
@@ -23,7 +23,6 @@ const config = {
     eyebrow: 'A little surprise',
     hint: 'Scratch the heart to reveal',
     title: "You're Invited",
-    saveTheDate: 'Save the Date',
   },
 
   hands: {
@@ -33,11 +32,11 @@ const config = {
 
   closing: {
     line: "We can't wait to celebrate with you",
-    dua: 'بارك الله لكما وبارك عليكما وجمع بينكما في خير',
+    dua: 'بَارَكَ ٱللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ',
   },
 
   verse: {
-    arabic: 'وَخَلَقْنَاكُمْ أَزْوَاجًا',
+    arabic: 'وَخَلَقْنَـٰكُمْ أَزْوَٰجًا',
     translation: 'And We created you in pairs.',
     reference: 'Quran 78:8',
   },
@@ -47,7 +46,7 @@ const config = {
     {
       key: 'nikah',
       name: 'Nikah',
-      arabic: 'النكاح',
+      arabic: 'ٱلنِّكَاح',
       start: '2026-12-28T16:00:00+05:30',
       end: '2026-12-28T21:00:00+05:30',
       venue: {
@@ -59,7 +58,7 @@ const config = {
     {
       key: 'walima',
       name: 'Walima',
-      arabic: 'الوليمة',
+      arabic: 'ٱلْوَلِيمَة',
       start: '2026-12-30T19:00:00+05:30',
       end: '2026-12-30T23:00:00+05:30',
       venue: {
