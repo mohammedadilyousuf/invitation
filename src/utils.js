@@ -60,3 +60,7 @@ export function saveTheDate(ev) {
 
 // Image helper that respects the deploy base path (GitHub Pages serves from /<repo>/).
 export const asset = (name) => `${import.meta.env.BASE_URL}images/${name}`;
+
+// The Walima-only invitation uses its own couple photo.
+export const coupleImage = () => asset(config.invite === 'walima' ? 'couple-walima.jpg' : 'couple.jpg');
+export const handsImage = () => asset(config.invite === 'walima' ? 'hands-walima.jpg' : 'hands.jpg');

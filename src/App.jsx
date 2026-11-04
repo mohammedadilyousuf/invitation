@@ -1,25 +1,16 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
 import config from './data/config';
 import Intro from './components/Intro';
-import Hero from './components/Hero';
-import QuranVerse from './components/QuranVerse';
-import ScratchReveal from './components/ScratchReveal';
-import Hands from './components/Hands';
-import Countdown from './components/Countdown';
-import Events from './components/Events';
-import RSVP from './components/RSVP';
+import Film from './components/Film';
 import MusicPlayer from './components/MusicPlayer';
 import Petals from './components/Petals';
 import GoldDust from './components/GoldDust';
-import Footer from './components/Footer';
 import { Overlay } from './components/Ornaments';
 
 export default function App() {
   // closed: sealed doors | revealing: doors opening | done: intro gone, page scrolls
   const [phase, setPhase] = useState('closed');
   const [playing, setPlaying] = useState(false);
-  const [scratched, setScratched] = useState(false); // the rest of the invitation stays locked until the heart is scratched
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -27,9 +18,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = phase === 'done' ? '' : 'hidden';
-    if (phase === 'done') window.scrollTo(0, 0);
-  }, [phase]);
+    document.body.style.overflow = 'hidden'; // the film is a fixed stage; only the RSVP panel scrolls
+  }, []);
 
   useEffect(() => {
     if (!config.music) return;
@@ -68,24 +58,7 @@ export default function App() {
       <Petals active={revealed} />
       {phase !== 'done' && <Intro onTap={onTap} onReveal={() => setPhase('revealing')} onDone={() => setPhase('done')} />}
       {config.music && revealed && <MusicPlayer playing={playing} onToggle={toggleMusic} />}
-      <main className="column z-10">
-        {revealed && (
-          <>
-            <Hero />
-            <QuranVerse />
-            <ScratchReveal onRevealed={() => setScratched(true)} />
-            {scratched && (
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.6, delay: 0.8 }}>
-                <Hands />
-                <Countdown />
-                <Events />
-                <RSVP />
-                <Footer />
-              </motion.div>
-            )}
-          </>
-        )}
-      </main>
+      {revealed && <Film />}
     </>
   );
 }

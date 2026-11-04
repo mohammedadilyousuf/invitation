@@ -27,9 +27,8 @@ function useLayout() {
   return hasWide && aspect > 1.2 ? 'wide' : 'pillar';
 }
 
-// Gold seal with embossed initials and a ring of "TAP TO OPEN" text.
-function Seal({ initials, text }) {
-  const ring = `${text} • `.repeat(3);
+// Gold seal with embossed initials.
+function Seal({ initials }) {
   const dots = Array.from({ length: 36 }, (_, i) => {
     const a = (i * Math.PI * 2) / 36;
     return <circle key={i} cx={120 + 76 * Math.cos(a)} cy={120 + 76 * Math.sin(a)} r="2.4" fill="#e6cf8e" />;
@@ -43,31 +42,24 @@ function Seal({ initials, text }) {
           <stop offset="1" stopColor="#7a5a1c" />
         </radialGradient>
         <radialGradient id="sealInner" cx="60%" cy="65%" r="85%">
-          <stop offset="0" stopColor="#e9cf86" />
-          <stop offset=".6" stopColor="#b8902f" />
-          <stop offset="1" stopColor="#8a6420" />
+          <stop offset="0" stopColor="#2a1d0c" />
+          <stop offset="1" stopColor="#0e0905" />
         </radialGradient>
-        <path id="ringPath" d="M120 120m-104 0a104 104 0 1 1 208 0a104 104 0 1 1-208 0" />
       </defs>
-      <g className="spin-12" style={{ transformOrigin: '120px 120px' }}>
-        <text fontFamily="Lato, sans-serif" fontSize="12" fontWeight="700" fill="#f6e3a6" stroke="#000" strokeWidth="2.5" paintOrder="stroke" textLength={2 * Math.PI * 104 - 8} lengthAdjust="spacing">
-          <textPath href="#ringPath">{ring}</textPath>
-        </text>
-      </g>
       <circle cx="120" cy="120" r="82" fill="url(#sealGold)" stroke="#6b4c14" strokeWidth="1.5" />
       {dots}
       <circle cx="120" cy="120" r="64" fill="none" stroke="#7a5a1c" strokeWidth="1.5" />
       <circle cx="120" cy="120" r="62" fill="none" stroke="#fbe7a8" strokeWidth=".8" opacity=".7" />
       <circle cx="120" cy="120" r="54" fill="url(#sealInner)" />
       <g fontFamily="Pinyon Script, cursive" textAnchor="middle">
-        <g fill="#fbe7a8" opacity=".75" transform="translate(1.2 1.4)">
-          <text x="92" y="140" fontSize="52">{initials[0]}</text>
-          <text x="148" y="140" fontSize="52">{initials[1]}</text>
+        <g fill="#000" opacity=".8" transform="translate(1.2 1.6)">
+          <text x="92" y="140" fontSize="56">{initials[0]}</text>
+          <text x="148" y="140" fontSize="56">{initials[1]}</text>
         </g>
-        <g fill="#3a2608">
-          <text x="92" y="140" fontSize="52">{initials[0]}</text>
-          <text x="148" y="140" fontSize="52">{initials[1]}</text>
-          <text x="120" y="128" fontSize="26" fontFamily="Cormorant Garamond, serif" fontStyle="italic">&amp;</text>
+        <g fill="#fff6dc">
+          <text x="92" y="140" fontSize="56">{initials[0]}</text>
+          <text x="148" y="140" fontSize="56">{initials[1]}</text>
+          <text x="120" y="128" fontSize="26" fontFamily="Cormorant Garamond, serif" fontStyle="italic" fill="#e6cf8e">&amp;</text>
         </g>
       </g>
     </svg>
@@ -149,7 +141,8 @@ export default function Intro({ onTap, onReveal, onDone }) {
             className="relative w-[min(58vw,250px,32svh)] cursor-pointer select-none outline-none transition-transform duration-500 hover:scale-105 focus-visible:scale-105"
             style={{ filter: 'drop-shadow(0 12px 22px rgba(0,0,0,.75))' }}
           >
-            <Seal initials={couple.initials} text={intro.sealText} />
+            <Seal initials={couple.initials} />
+            <p className="absolute left-1/2 top-full mt-5 -translate-x-1/2 whitespace-nowrap rounded-full border border-gold/50 bg-black/70 px-5 py-2 font-sans text-[.7rem] font-bold uppercase tracking-[.3em] text-[#fff6dc]">{intro.sealText}</p>
           </div>
         </div>
       </div>

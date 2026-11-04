@@ -11,7 +11,7 @@
 
 @layer components {
   .btn-gold {
-    @apply inline-block cursor-pointer border border-gold bg-transparent px-8 py-3 font-sans text-[.7rem] uppercase tracking-[.3em] text-gold-soft transition-all duration-700 ease-out;
+    @apply inline-block cursor-pointer border border-gold bg-transparent px-8 py-3 font-sans text-[.75rem] font-bold uppercase tracking-[.25em] text-gold-soft transition-all duration-700 ease-out;
   }
   .btn-gold:hover { @apply -translate-y-0.5 bg-gold text-ink; box-shadow: 0 0 30px rgba(201, 162, 75, .45); }
   .btn-solid { @apply bg-gold text-ink; }
@@ -60,5 +60,23 @@
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .petal, .eq span, .shimmer-gold, .spin-12, .spin-slow, .float-y, .glow-pulse, .drift { animation: none; }
+  .petal, .eq span, .shimmer-gold, .shimmer-ivory, .spin-12, .spin-slow, .float-y, .glow-pulse, .drift { animation: none; }
 }
+
+@keyframes film-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.film-fill { animation: film-fill linear forwards; }
+
+/* Ivory lettering for text that sits over the gold artwork (gold-on-gold loses contrast).
+   Every stop is light and both ends match, so the sweep loops without ever dimming the text. */
+.shimmer-ivory {
+  background: linear-gradient(110deg, #f6ebcc 0%, #f6ebcc 38%, #ffffff 50%, #f6ebcc 62%, #f6ebcc 100%);
+  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: ivory-sheen 6s ease-in-out infinite;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, .7));
+}
+@keyframes ivory-sheen { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+.scrim { background: radial-gradient(ellipse 90% 70% at 50% 50%, rgba(5, 4, 3, .94) 0%, rgba(5, 4, 3, .78) 55%, transparent 100%); }
+
+/* Vowelled Arabic (tashkeel, dagger alif) extends past the line box; the gradient fill of
+   shimmer text only paints inside the box, so give those lines room or the marks vanish. */
+.font-arabic.shimmer-gold, .font-arabic.shimmer-ivory { line-height: 1.9; padding-block: .4em; }

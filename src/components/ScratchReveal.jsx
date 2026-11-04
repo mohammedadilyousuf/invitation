@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import config from '../data/config';
 import Reveal from './Reveal';
 import { Overlay, SectionTitle } from './Ornaments';
-import { fmtDate, fmtTime, saveTheDate } from '../utils';
+import { fmtDate, fmtTime } from '../utils';
 
 // Same heart path is used for the foil on the canvas and the SVG outline underneath.
 const HEART = 'M50 85C10 55 0 35 0 22 0 10 10 0 24 0c11 0 21 6 26 15C55 6 65 0 76 0c14 0 24 10 24 22 0 13-10 33-50 63z';
@@ -38,7 +38,7 @@ function PetalBurst() {
   );
 }
 
-export default function ScratchReveal({ onRevealed }) {
+export default function ScratchReveal({ onRevealed, compact = false }) {
   const { scratch } = config;
   const ev = config.events[0];
   const wrapRef = useRef(null);
@@ -122,11 +122,11 @@ export default function ScratchReveal({ onRevealed }) {
   }, []);
 
   return (
-    <section id="invite" className="relative overflow-hidden px-6 py-28 sm:py-36">
+    <section id="invite" className={`relative w-full overflow-hidden px-6 ${compact ? 'py-16' : 'py-28 sm:py-36'}`}>
       <Overlay src="sparkle.jpg" className="drift absolute inset-0 h-full w-full object-cover opacity-50" />
       <div className="relative">
         <SectionTitle eyebrow={scratch.eyebrow} title={scratch.hint} />
-        <Reveal className="relative mx-auto w-[min(88vw,400px)]">
+        <Reveal className="relative mx-auto w-[min(88vw,400px,50svh)]">
           <div ref={wrapRef} className="relative aspect-[100/90] touch-none" style={{ filter: 'drop-shadow(0 0 40px rgba(201,162,75,.35))' }}>
             <svg viewBox="0 0 100 90" className="absolute inset-0 h-full w-full" aria-hidden="true">
               <path d={HEART} fill="#120e09" stroke="#c9a24b" strokeWidth=".8" />
@@ -149,13 +149,8 @@ export default function ScratchReveal({ onRevealed }) {
           {revealed && <PetalBurst />}
         </Reveal>
 
-        <div className="mt-12 min-h-[5rem] text-center">
+        <div className={`min-h-[5rem] text-center ${compact ? 'mt-6' : 'mt-12'}`}>
           {!revealed && <p className="eyebrow animate-pulse">Scratch to continue</p>}
-          {revealed && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, delay: 0.6 }}>
-              <button type="button" onClick={() => saveTheDate(ev)} className="btn-gold btn-solid">{scratch.saveTheDate}</button>
-            </motion.div>
-          )}
         </div>
       </div>
     </section>
