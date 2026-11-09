@@ -139,7 +139,7 @@ const Btn = ({ label, onClick, disabled, children }) => (
 );
 
 // The invitation as a self-playing film: timed scenes, a progress bar per scene, and a final scene that waits for the guest.
-export default function Film() {
+export default function Film({ onPauseChange }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [rsvpOpen, setRsvpOpen] = useState(false);
@@ -202,7 +202,7 @@ export default function Film() {
 
       <div className="absolute bottom-5 left-1/2 z-50 flex -translate-x-1/2 items-center gap-3">
         <Btn label="Previous" onClick={() => go(index - 1)} disabled={index === 0}><path d="M6 5h2v14H6zM20 5v14L9 12z" /></Btn>
-        <Btn label={paused ? 'Play' : 'Pause'} onClick={() => setPaused((p) => !p)} disabled={index === last}>
+        <Btn label={paused ? 'Play' : 'Pause'} onClick={() => { setPaused(!paused); onPauseChange?.(!paused); }} disabled={index === last}>
           {paused ? <path d="M7 4v16l13-8z" /> : <path d="M6 4h4v16H6zM14 4h4v16h-4z" />}
         </Btn>
         <Btn label="Next" onClick={() => go(index + 1)} disabled={index === last || locked}><path d="M16 5h2v14h-2zM4 5v14l11-7z" /></Btn>

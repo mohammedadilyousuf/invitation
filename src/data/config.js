@@ -79,7 +79,7 @@ const config = {
 
   contact: { name: 'Md Mazhar Ahmed', phone: '+91 77308 87850' },
 
-  music: '', // e.g. '/music.mp3' placed in /public. Empty hides the music button.
+  music: '/music.m4a', // file in /public. Empty hides the music button.
 };
 
 // Which events each invitation link includes. The page reads data-invite from index.html (full) or walima/index.html (walima).

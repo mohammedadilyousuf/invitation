@@ -25,6 +25,7 @@ export default function App() {
     if (!config.music) return;
     const a = new Audio(import.meta.env.BASE_URL + config.music.replace(/^\//, ''));
     a.loop = true;
+    a.preload = 'none'; // don't compete with the images; it is fetched when the guest taps the seal
     a.volume = 0.6;
     audioRef.current = a;
     return () => a.pause();
@@ -40,6 +41,20 @@ export default function App() {
   // Music starts only after the visitor's first tap.
   const onTap = useCallback(() => {
     audioRef.current?.play().then(() => setPlaying(true)).catch(() => {});
+  }, []);
+
+  // Pausing the film pauses the music too; resuming restarts it only if it was playing before the pause.
+  const resumeMusic = useRef(false);
+  const onFilmPause = useCallback((paused) => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (paused) {
+      resumeMusic.current = !a.paused;
+      a.pause();
+      setPlaying(false);
+    } else if (resumeMusic.current) {
+      a.play().then(() => setPlaying(true)).catch(() => {});
+    }
   }, []);
 
   const revealed = phase !== 'closed';
@@ -58,7 +73,7 @@ export default function App() {
       <Petals active={revealed} />
       {phase !== 'done' && <Intro onTap={onTap} onReveal={() => setPhase('revealing')} onDone={() => setPhase('done')} />}
       {config.music && revealed && <MusicPlayer playing={playing} onToggle={toggleMusic} />}
-      {revealed && <Film />}
+      {revealed && <Film onPauseChange={onFilmPause} />}
     </>
   );
 }
