@@ -1,12 +1,12 @@
 // Everything on the invitation is edited here. No other file needs to change.
 const config = {
-  siteTitle: 'Mazhar Bhaiya & Bhaabi | Wedding Invitation',
+  siteTitle: 'Md Mazhar Ahmed & Samreen | Wedding Invitation',
   timezone: 'Asia/Kolkata',
 
   couple: {
-    groom: 'Mazhar Bhaiya',
-    bride: 'Bhaabi',
-    initials: ['M', 'B'],
+    groom: 'Md Mazhar Ahmed',
+    bride: 'Samreen',
+    initials: ['M', 'S'],
   },
 
   intro: {
@@ -77,7 +77,7 @@ const config = {
     endpoint: 'https://script.google.com/macros/s/AKfycbxjuY0NLka14YC2Ts12PltOfoKXCf5SLYpeGBaJMnKf6gG7Y08WUfGqkCY2EW349y_9xg/exec',
   },
 
-  contact: { name: 'Mazhar Bhaiya', phone: '+91 77308 87850' },
+  contact: { name: 'Md Mazhar Ahmed', phone: '+91 77308 87850' },
 
   music: '', // e.g. '/music.mp3' placed in /public. Empty hides the music button.
 };
