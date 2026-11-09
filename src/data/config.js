@@ -1,6 +1,6 @@
 // Everything on the invitation is edited here. No other file needs to change.
 const config = {
-  siteTitle: 'Md Mazhar Ahmed & Samreen | Wedding Invitation',
+  siteTitle: 'Mazhar & Samreen | Wedding Invitation',
   timezone: 'Asia/Kolkata',
 
   couple: {
