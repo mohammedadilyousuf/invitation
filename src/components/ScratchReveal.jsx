@@ -38,12 +38,37 @@ function PetalBurst() {
   );
 }
 
+// A finger that sweeps back and forth across the foil, so guests see that the heart is meant to be scratched.
+function ScratchHint() {
+  return (
+    <motion.div
+      className="pointer-events-none absolute z-10"
+      aria-hidden="true"
+      initial={{ left: '28%', top: '38%', opacity: 0 }}
+      animate={{
+        left: ['28%', '70%', '30%', '68%', '36%'],
+        top: ['38%', '44%', '54%', '62%', '70%'],
+        opacity: [0, 1, 1, 1, 0],
+      }}
+      transition={{ duration: 3.6, ease: 'easeInOut', repeat: Infinity, repeatDelay: 0.9 }}
+    >
+      {/* touch point: a soft glowing dot with a pulsing ring */}
+      <span className="absolute -left-4 -top-4 block h-8 w-8 rounded-full bg-[#fff6dc]/60 blur-[2px]" />
+      <span className="absolute -left-4 -top-4 block h-8 w-8 animate-ping rounded-full border border-[#fff6dc]/80" />
+      <svg viewBox="0 0 24 24" width="44" height="44" className="absolute -left-[13px] -top-[6px]" style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,.8))' }}>
+        <path fill="#fff6dc" d="M9 11.24V7.5a2.5 2.5 0 0 1 5 0v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z" />
+      </svg>
+    </motion.div>
+  );
+}
+
 export default function ScratchReveal({ onRevealed, compact = false }) {
   const { scratch } = config;
   const ev = config.events[0];
   const wrapRef = useRef(null);
   const canvasRef = useRef(null);
   const [revealed, setRevealed] = useState(false);
+  const [touched, setTouched] = useState(false); // the guest has started scratching, so the hint can stop
   const cb = useRef(onRevealed);
   cb.current = onRevealed;
 
@@ -91,7 +116,7 @@ export default function ScratchReveal({ onRevealed, compact = false }) {
       const r = canvas.getBoundingClientRect();
       return { x: (e.clientX - r.left) * (canvas.width / r.width), y: (e.clientY - r.top) * (canvas.height / r.height) };
     };
-    const down = (e) => { drawing = true; last = pos(e); canvas.setPointerCapture(e.pointerId); move(e); };
+    const down = (e) => { setTouched(true); drawing = true; last = pos(e); canvas.setPointerCapture(e.pointerId); move(e); };
     const up = () => { drawing = false; };
     function move(e) {
       if (!drawing || done) return;
@@ -145,12 +170,13 @@ export default function ScratchReveal({ onRevealed, compact = false }) {
               aria-label="Gold foil heart. Scratch to reveal the wedding date."
               className={`absolute inset-0 h-full w-full cursor-grab transition-opacity duration-1000 ${revealed ? 'pointer-events-none opacity-0' : ''}`}
             />
+            {!touched && !revealed && <ScratchHint />}
           </div>
           {revealed && <PetalBurst />}
         </Reveal>
 
         <div className={`min-h-[5rem] text-center ${compact ? 'mt-6' : 'mt-12'}`}>
-          {!revealed && <p className="eyebrow animate-pulse">Scratch to continue</p>}
+          {!revealed && <p className="eyebrow animate-pulse">Swipe your finger over the heart</p>}
         </div>
       </div>
     </section>
