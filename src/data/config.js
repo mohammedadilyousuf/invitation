@@ -4,7 +4,7 @@ const config = {
   timezone: 'Asia/Kolkata',
 
   couple: {
-    groom: 'Md Mazhar Ahmed',
+    groom: 'Mazhar',
     bride: 'Samreen',
     initials: ['M', 'S'],
   },
@@ -77,7 +77,7 @@ const config = {
     endpoint: 'https://script.google.com/macros/s/AKfycbxjuY0NLka14YC2Ts12PltOfoKXCf5SLYpeGBaJMnKf6gG7Y08WUfGqkCY2EW349y_9xg/exec',
   },
 
-  contact: { name: 'Md Mazhar Ahmed', phone: '+91 77308 87850' },
+  contact: { name: 'Mazhar', phone: '+91 77308 87850' },
 
   music: '/music.m4a', // file in /public. Empty hides the music button.
 };

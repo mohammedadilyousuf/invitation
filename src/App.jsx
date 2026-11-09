@@ -6,11 +6,13 @@ import MusicPlayer from './components/MusicPlayer';
 import Petals from './components/Petals';
 import GoldDust from './components/GoldDust';
 import { Overlay } from './components/Ornaments';
+import useWakeLock from './useWakeLock';
 
 export default function App() {
   // closed: sealed doors | revealing: doors opening | done: intro gone, page scrolls
   const [phase, setPhase] = useState('closed');
   const [playing, setPlaying] = useState(false);
+  const [started, setStarted] = useState(false); // the guest has tapped the seal
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export default function App() {
 
   // Music starts only after the visitor's first tap.
   const onTap = useCallback(() => {
+    setStarted(true);
     audioRef.current?.play().then(() => setPlaying(true)).catch(() => {});
   }, []);
 
@@ -58,6 +61,7 @@ export default function App() {
   }, []);
 
   const revealed = phase !== 'closed';
+  useWakeLock(started); // no screen timeout from the first tap onwards
 
   return (
     <>
